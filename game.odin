@@ -161,6 +161,8 @@ draw_layer :: proc(layer: [10][10]int) {
                 color = rl.LIGHTGRAY
             } else if tile == 3 {
                 color = rl.BLUE 
+            } else if tile == 7 {
+                rl.DrawTexture(sprites[.DOT].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             } else {
                 continue
             }
@@ -181,7 +183,7 @@ draw_objects :: proc() {
             } else if tile == 4 {
                 rl.DrawTexture(sprites[.PLAYER].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             } else if tile == 8 { 
-                rl.DrawTexture(sprites[.DOOR].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
+                rl.DrawTexture(sprites[.CRATE].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             } else if tile == 5 {
                 rl.DrawTexture(sprites[.DOOR].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             } else if tile == 6 {
@@ -379,8 +381,8 @@ init :: proc() {
         .WALL = {rl.LoadTexture("assets/textures/wall.png")},
         .DOOR = {rl.LoadTexture("assets/textures/door.png")},
         .KEY = {rl.LoadTexture("assets/textures/key.png")},
-        .CRATE = {},
-        .DOT = {},
+        .CRATE = {rl.LoadTexture("assets/textures/crate.png")},
+        .DOT = {rl.LoadTexture("assets/textures/dot.png")},
     }
     current_state = .MAIN
     player_has_key = false
