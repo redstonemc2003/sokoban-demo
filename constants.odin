@@ -3,7 +3,7 @@ package demo
 title :: "Sokoban Demo!"
 TILE_SIZE :: 64
 ROWS :: 10
-COLS :: 10
+COLS :: 20
 screen_width :: 1280
 screen_height :: 720
 CAMERA_VIEW_TILES_X :: 3

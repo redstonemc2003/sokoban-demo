@@ -49,8 +49,10 @@ gray := gal.set_color("gray")
 // Game Variables
 camera : rl.Camera2D
 current_state : ProgramState
-floor_layer : [10][10]int
-object_layer : [10][10]int
+tutorial_floor_layer: [10][10]int
+tutorial_object_layer: [10][10]int
+floor_layer : [10][20]int
+object_layer : [10][20]int
 player_has_key : bool 
 sprites : [SpriteID]SpriteTexture
 level_index : int
@@ -151,7 +153,7 @@ init_level :: proc(level_index: i32) {
     8 - Crate
 
 */
-draw_layer :: proc(layer: [10][10]int) {
+draw_layer :: proc(layer: [10][20]int) {
     for i : i32 = 0; i < ROWS; i+=1 {
         for j : i32 = 0; j < COLS; j+=1 {
             tile := layer[i][j]
@@ -351,19 +353,6 @@ sokoban_interactions :: proc() {
     if sokoban_completed {
         fmt.printf("Sokoban puzzle completed! You win!\n")
         current_state = .COMPLETED
-    }
-}
-
-undo_last_move :: proc() {
-    if len(game_state_stack) > 0 {
-        last_state := game_state_stack[len(game_state_stack) - 1]
-        object_layer = last_state.object_layer
-        player_row = last_state.player_row
-        player_col = last_state.player_col
-
-        pop(&game_state_stack)
-    }else {
-        fmt.printf("No more moves to undo!\n")
     }
 }
 
