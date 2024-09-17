@@ -146,19 +146,23 @@ draw_layer :: proc(layer: [10][20]int) {
             color : rl.Color
 
             if tile == 1 {
-                color = rl.LIGHTGRAY
+                color = gal.set_color("black")
             } else if tile == 2 {
                 rl.DrawTexture(sprites[.WALL].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             } else if tile == 3 {
                 rl.DrawTexture(sprites[.HEAVY_CRATE].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             } else if tile == 7 {
                 rl.DrawTexture(sprites[.DOT].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
+            } else if tile == 9 {
+                rl.DrawTexture(sprites[.WATER].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
+            } else if tile == 10 {
+                rl.DrawTexture(sprites[.SPIKE].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             } else {
                 continue
             }
 
             rl.DrawRectangle(startX + j * TILE_SIZE, startY + i * TILE_SIZE, TILE_SIZE, TILE_SIZE, color)
-            rl.DrawRectangleLines(startX + j * TILE_SIZE, startY + i * TILE_SIZE, TILE_SIZE, TILE_SIZE, rl.BLACK)
+            rl.DrawRectangleLines(startX + j * TILE_SIZE, startY + i * TILE_SIZE, TILE_SIZE, TILE_SIZE, gal.set_color("ray-white"))
         }
     }
 }
@@ -397,7 +401,7 @@ draw :: proc() {
 
             if gal.draw_button(startbtn) {
                 current_state = .GAME
-                level_index = 1
+                level_index = 2
                 init_level(cast(i32)level_index)
             }
 
