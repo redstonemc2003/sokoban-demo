@@ -4,16 +4,16 @@ package demo
 
     /*
         // Layer Tiles
-        0 - empty
         1 - floor
         2 - wall
         3- heavy crate
+        7 - Dot Tile
+        
+        Object tiles
+        0 - empty
         4 - player
         5 - locked door
         6 - key
-        
-        Sokoban Related tiles
-        7 - Dot Tile
         8 - Crate
 
     */

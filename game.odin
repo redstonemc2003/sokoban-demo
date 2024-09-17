@@ -29,6 +29,9 @@ SpriteID :: enum u8 {
     KEY,
     CRATE,
     DOT,
+    HEAVY_CRATE,
+    WATER,
+    SPIKE,
 }
 
 SpriteTexture :: struct {
@@ -144,8 +147,10 @@ draw_layer :: proc(layer: [10][20]int) {
 
             if tile == 1 {
                 color = rl.LIGHTGRAY
+            } else if tile == 2 {
+                rl.DrawTexture(sprites[.WALL].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             } else if tile == 3 {
-                color = rl.BLUE 
+                rl.DrawTexture(sprites[.HEAVY_CRATE].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             } else if tile == 7 {
                 rl.DrawTexture(sprites[.DOT].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             } else {
@@ -163,16 +168,14 @@ draw_objects :: proc() {
         for j : i32 = 0; j < COLS; j+=1 {
             tile := object_layer[i][j]
 
-            if tile == 2 {
-                rl.DrawTexture(sprites[.WALL].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
-            } else if tile == 4 {
+            if tile == 4 {
                 rl.DrawTexture(sprites[.PLAYER].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
-            } else if tile == 8 { 
-                rl.DrawTexture(sprites[.CRATE].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             } else if tile == 5 {
                 rl.DrawTexture(sprites[.DOOR].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             } else if tile == 6 {
                 rl.DrawTexture(sprites[.KEY].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
+            } else if tile == 8 { 
+                rl.DrawTexture(sprites[.CRATE].texture, startX + j * TILE_SIZE, startY + i * TILE_SIZE,  rl.WHITE)
             }
         }
     }
@@ -355,6 +358,9 @@ init :: proc() {
         .KEY = {rl.LoadTexture("assets/textures/key.png")},
         .CRATE = {rl.LoadTexture("assets/textures/crate.png")},
         .DOT = {rl.LoadTexture("assets/textures/dot.png")},
+        .HEAVY_CRATE = {rl.LoadTexture("assets/textures/heavy_crate.png")},
+        .WATER = {rl.LoadTexture("assets/textures/water.png")},
+        .SPIKE = {rl.LoadTexture("assets/textures/spike.png")}
     }
     current_state = .MAIN
     player_has_key = false
