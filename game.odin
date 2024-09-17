@@ -109,8 +109,8 @@ update_camera :: proc() {
     target_x := player_pos.x * TILE_SIZE + TILE_SIZE/2 - CAMERA_VIEW_WIDTH/2
     target_y := player_pos.y * TILE_SIZE + TILE_SIZE/2 - CAMERA_VIEW_HEIGHT/2
     
-    camera.target.x = gal.lerp(camera.target.x, target_x, 0.1)
-    camera.target.y = gal.lerp(camera.target.y, target_y, 0.1)
+    camera.target.x = gal.lerp(camera.target.x - 16, target_x - 16, 0.1)
+    camera.target.y = gal.lerp(camera.target.y - 16, target_y - 16, 0.1)
 }
 
 /*
@@ -128,14 +128,6 @@ init_level :: proc(level_index: i32) {
             level2()
         case 3:
             level3()
-        case 4:
-            level4()
-        case 5:
-            level5()
-        case 6:
-            level6()
-        case 7:
-            level7()
     }
 }
 
@@ -388,7 +380,7 @@ draw :: proc() {
         case .GAME:
             rl.BeginMode2D(camera)
             defer rl.EndMode2D()
-            rl.DrawText(text, screen_width/2 - 600, screen_height/2 - 300, 50, rl.RAYWHITE)
+            rl.DrawText(text, screen_width/2 - 600, screen_height/2 - 300, 50, gal.set_color("ray-white"))
             draw_layer(floor_layer)
             draw_layer(object_layer)
             draw_objects()
@@ -401,7 +393,7 @@ draw :: proc() {
 
             if gal.draw_button(startbtn) {
                 current_state = .GAME
-                level_index = 2
+                level_index = 1
                 init_level(cast(i32)level_index)
             }
 
@@ -470,7 +462,7 @@ update :: proc() {
 
         case .COMPLETED:
             if rl.IsKeyPressed(.ENTER) {
-                if level_index < 6 {
+                if level_index < 4 {
                     level_index += 1
                     init_level(cast(i32)level_index)
                     current_state = .GAME
