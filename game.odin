@@ -49,8 +49,6 @@ gray := gal.set_color("gray")
 // Game Variables
 camera : rl.Camera2D
 current_state : ProgramState
-tutorial_floor_layer: [10][10]int
-tutorial_object_layer: [10][10]int
 floor_layer : [10][20]int
 object_layer : [10][20]int
 player_has_key : bool 
@@ -138,21 +136,6 @@ init_level :: proc(level_index: i32) {
     }
 }
 
-/*
-    // Layer Tiles
-    0 - empty
-    1 - floor
-    2 - wall
-    3 - bed
-    4 - player
-    5 - locked door
-    6 - key
-    
-    Sokoban Related tiles
-    7 - Dot Tile
-    8 - Crate
-
-*/
 draw_layer :: proc(layer: [10][20]int) {
     for i : i32 = 0; i < ROWS; i+=1 {
         for j : i32 = 0; j < COLS; j+=1 {
