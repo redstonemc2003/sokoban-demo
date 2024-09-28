@@ -428,6 +428,7 @@ draw :: proc() {
             rl.DrawText("D - Move Right", screen_width/2 - 400 , screen_height/2 - 50, 50, white) 
             rl.DrawText("Left Mouse Button - Interact with Door", screen_width/2 - 400, screen_height/2, 50, white) 
             rl.DrawText("Right Mouse Button - Pick up Item", screen_width/2 - 400, screen_height/2 + 50, 50, white) 
+            rl.DrawText("Mouse Scroll - Zoom Controls", screen_width/2 - 400, screen_height/2 + 100, 50, white)
     }
 }
 
